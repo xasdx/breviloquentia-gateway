@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "prestart:prod": "tsc --outDir dist src/main.ts",
+    "prestart:prod": "tsc",
     "start:prod": "node dist/main.js"
   }
 }
