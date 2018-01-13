@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from "@nestjs/common"
+import { Controller, Get, Post, Body } from "@nestjs/common"
 
 @Controller("services")
 export class ServiceController {
@@ -7,5 +7,5 @@ export class ServiceController {
   async findAll() { return [{}] }
   
   @Post()
-  async create() {}
+  async create(@Body() dto: ServiceDto) {}
 }
