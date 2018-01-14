@@ -1,3 +1,11 @@
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm"
+
+@Entity()
 export class Service {
-  readonly name: string
+  
+  @PrimaryGeneratedColumn()
+  id: number
+  
+  @Column()
+  name: string
 }
