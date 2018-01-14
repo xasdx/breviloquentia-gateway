@@ -13,5 +13,7 @@ describe("Service API", () => {
     app.init()
   })
   
-  it("GET /services", () => request(server).get("/services").expect(200).expect([{}]))
+  it("Handles GET /services", () => request(server).get("/services").expect(200).expect([{}]))
+  
+  it("Handles POST /services", () => request(server).post("/services").expect(201).expect({}))
 })
