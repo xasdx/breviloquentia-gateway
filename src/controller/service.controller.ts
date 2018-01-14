@@ -8,8 +8,12 @@ export class ServiceController {
   constructor(private readonly service: ServiceService) {}
   
   @Get()
-  async findAll(): Promise<Service[]> { this.service.findAll() }
+  async findAll() {
+    this.service.findAll()
+  }
   
   @Post()
-  async create(@Body() dto: ServiceDto) { this.service.create(dto) }
+  async create(@Body() dto: ServiceDto) {
+    this.service.create(dto)
+  }
 }
