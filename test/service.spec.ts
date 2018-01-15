@@ -38,9 +38,15 @@ describe("Service API", () => {
     })
   })
   
-  it("Handles POST /services", async () => {
+  it("Handles POST /services", async (done) => {
     let service = { name: "breviloquentia-post" }
     let response = await request(server).post("/services").send(service).expect(201)
     expect(response.body.name).toBe(service.name)
+    db.query("SELECT * FROM service", (err, res) => {
+      if (err) throw err
+      expect(res.length).toBe(1)
+      expect(res[0].name).toBe(service.name)
+      done()
+    })
   })
 })
