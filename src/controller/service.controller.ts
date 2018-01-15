@@ -9,11 +9,11 @@ export class ServiceController {
   
   @Get()
   async findAll() {
-    this.service.findAll()
+    return await this.service.findAll()
   }
   
   @Post()
   async create(@Body() dto: ServiceDto) {
-    this.service.create(dto)
+    return await this.service.create(dto)
   }
 }

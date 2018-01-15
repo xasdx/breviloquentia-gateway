@@ -1,34 +1,46 @@
 import * as express from "express"
 import * as request from "supertest"
 import { Test } from "@nestjs/testing"
-import {createConnection} from "typeorm"
 import { ApplicationModule } from "../src/app.module"
-import { Service } from "../src/model/service.model"
+import * as sql from "mysql"
 
 describe("Service API", () => {
   
   let server = express()
-  let db = null
+  
+  let db = sql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "root",
+    database: "test"
+  })
+  
+  db.connect()
   
   beforeAll(async () => {
     let module = await Test.createTestingModule({ imports: [ApplicationModule] }).compile()
     let app = module.createNestApplication(server)
     app.init()
-    db = await createConnection({
-      type: "mysql",
-      host: "localhost",
-      port: 3306,
-      username: "root",
-      password: "root",
-      database: "test",
-      entities: [__dirname + "../src/model/*.model.ts"],
-      synchronize: true
+  })
+  
+  beforeEach(done => db.query("DELETE FROM service", (err, res) => {
+    if (err) throw err
+    done()
+  }))
+  
+  it("Handles GET /services", done => {
+    let service = { name: "breviloquentia-post" }
+    db.query("INSERT INTO service SET ?", service, async (err, res) => {
+      if (err) throw err
+      let response = await request(server).get("/services").expect(200)
+      expect(response.body[0].name).toBe(service.name)
+      done()
     })
   })
   
-  beforeEach(async () => { db.getRepository(Service).clear() })
-  
-  it("Handles GET /services", () => request(server).get("/services").expect(200).expect([{}]))
-  
-  it("Handles POST /services", () => request(server).post("/services").expect(201).expect({}))
+  it("Handles POST /services", async () => {
+    let service = { name: "breviloquentia-post" }
+    let response = await request(server).post("/services").send(service).expect(201)
+    expect(response.body.name).toBe(service.name)
+  })
 })
