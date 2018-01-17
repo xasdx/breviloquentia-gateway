@@ -5,10 +5,10 @@ import { ServiceService } from "./service/service.service"
 
 let typeOrm = TypeOrmModule.forRoot({
   type: "mysql",
-  host: "127.0.0.1",
+  host: process.env["DB_HOST"] || "localhost",
   port: 3306,
-  username: "root",
-  password: "",
+  username: process.env["DB_USER"] || "root",
+  password: process.env["DB_PASS"] || "root",
   database: "test",
   entities: [__dirname + "/model/*.model.ts"],
   synchronize: true

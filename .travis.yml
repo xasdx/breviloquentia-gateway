@@ -3,5 +3,8 @@ node_js:
   - node
 services:
   - mysql
+env:
+  - DB_HOST="127.0.0.1"
+  - DB_PASS=""
 before_install:
   - mysql -u root --password="" < db.sql

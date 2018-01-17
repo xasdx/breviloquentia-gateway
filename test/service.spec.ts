@@ -9,9 +9,9 @@ describe("Service API", () => {
   let server = express()
   
   let db = sql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    password: "",
+    host: process.env["DB_HOST"] || "localhost",
+    user: process.env["DB_USER"] || "root",
+    password: process.env["DB_PASS"] || "root",
     database: "test"
   })
   
