@@ -1,6 +1,7 @@
 language: node_js
 node_js:
   - node
-
 services:
   - mysql
+before_install:
+  - mysql -u root --password="" < db.sql
