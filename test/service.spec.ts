@@ -20,7 +20,7 @@ describe("Service API", () => {
   beforeAll(async () => {
     let module = await Test.createTestingModule({ imports: [ApplicationModule] }).compile()
     let app = module.createNestApplication(server)
-    app.init()
+    await app.init()
   })
   
   beforeEach(done => db.query("DELETE FROM service", (err, res) => {

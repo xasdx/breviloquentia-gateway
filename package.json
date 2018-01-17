@@ -23,7 +23,7 @@
     "start": "node index.js",
     "prestart:prod": "tsc",
     "start:prod": "node dist/main.js",
-    "test": "jest"
+    "test": "jest --forceExit"
   },
   "jest": {
     "moduleFileExtensions": [
