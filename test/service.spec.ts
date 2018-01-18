@@ -7,7 +7,7 @@ import { Database } from "./db.util"
 describe("Service API", () => {
   
   let server = express()
-  let db = new Database()
+  let table = new Database("test").table("service")
   
   beforeAll(async () => {
     let module = await Test.createTestingModule({ imports: [ApplicationModule] }).compile()
@@ -15,11 +15,11 @@ describe("Service API", () => {
     await app.init()
   })
   
-  beforeEach(done => db.cleanTable("service", done))
+  beforeEach(done => table.cleanTable(done))
   
   it("Handles GET /services", done => {
     let service = { name: "breviloquentia-post" }
-    db.insertRow("service", service, async (err, res) => {
+    table.insertRow(service, async (err, res) => {
       if (err) throw err
       let response = await request(server).get("/services").expect(200)
       expect(response.body[0].name).toBe(service.name)
@@ -31,7 +31,7 @@ describe("Service API", () => {
     let service = { name: "breviloquentia-post" }
     let response = await request(server).post("/services").send(service).expect(201)
     expect(response.body.name).toBe(service.name)
-    db.allRows("service", (err, res) => {
+    table.allRows((err, res) => {
       if (err) throw err
       expect(res.length).toBe(1)
       expect(res[0].name).toBe(service.name)
