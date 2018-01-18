@@ -11,7 +11,7 @@ describe("Service API", () => {
   let db = sql.createConnection({
     host: process.env["DB_HOST"] || "localhost",
     user: process.env["DB_USER"] || "root",
-    password: process.env["DB_PASS"] || "root",
+    password: process.env["DB_PASS"] || null,
     database: "test"
   })
   
