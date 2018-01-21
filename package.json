@@ -35,6 +35,8 @@
     "transform": {
       "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "testRegex": "^((?!c9).)*test/.+\\.spec\\.ts$"
+    "testRegex": "^((?!c9).)*test/.+\\.spec\\.ts$",
+    "coverageDirectory": "./coverage",
+    "collectCoverage": true
   }
 }
