@@ -10,10 +10,10 @@ export class ServiceService {
   }
   
   async create(service: Service) {
-    return await this.repository.save(service)
+    return this.repository.save(service)
   }
   
   async findAll() {
-    return await this.repository.find()
+    return this.repository.find()
   }
 }
