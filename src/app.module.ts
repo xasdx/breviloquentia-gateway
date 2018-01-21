@@ -1,7 +1,6 @@
 import { Module } from "@nestjs/common"
 import { TypeOrmModule } from "@nestjs/typeorm"
-import { ServiceController } from "./controller/service.controller"
-import { ServiceService } from "./service/service.service"
+import { ServiceModule } from "./service/service.module"
 
 let typeOrm = TypeOrmModule.forRoot({
   type: "mysql",
@@ -10,13 +9,9 @@ let typeOrm = TypeOrmModule.forRoot({
   username: process.env["DB_USER"] || "root",
   password: process.env["DB_PASS"] || null,
   database: "test",
-  entities: [__dirname + "/model/*.model.ts"],
+  entities: [__dirname + "/**/*.model.ts"],
   synchronize: true
 })
 
-@Module({
-  imports: [typeOrm],
-  controllers: [ServiceController],
-  components: [ServiceService]
-})
+@Module({ imports: [typeOrm, ServiceModule] })
 export class ApplicationModule {}

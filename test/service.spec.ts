@@ -2,8 +2,8 @@ import * as express from "express"
 import * as request from "supertest"
 import { Test } from "@nestjs/testing"
 import "jest-to-match-shape-of"
-import { ApplicationModule } from "../src/app.module"
 import { Database } from "./db.util"
+import { ApplicationModule } from "../src/app.module"
 
 describe("Service API", () => {
   
