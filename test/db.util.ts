@@ -23,7 +23,7 @@ export class Database {
       this.db = db
     }
     
-    cleanTable(done) {
+    clean(done) {
       this.db.query(`DELETE FROM ${this.name}`, (err, res) => {
         if (err) throw err
         done()
