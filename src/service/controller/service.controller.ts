@@ -14,6 +14,6 @@ export class ServiceController {
   
   @Post()
   async create(@Body() dto: ServiceDto) {
-    return this.service.create(dto)
+    return this.service.create({ id: null, ...dto })
   }
 }

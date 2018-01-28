@@ -4,6 +4,8 @@ import { Connection } from "typeorm"
 
 @Component()
 export class ServiceService {
+  
+  repository
 
   constructor(private readonly connection: Connection) {
     this.repository = connection.getRepository(Service)
