@@ -4,6 +4,8 @@ import { Connection, Repository } from "typeorm"
 
 @Component()
 export class ServiceService {
+  
+  repository
 
   repository: Repository<Service>
 

@@ -1,0 +1,14 @@
+sut:
+  build: .
+  dockerfile: Dockerfile.test
+  command: npm test && codecov
+  links:
+    - web
+web:
+  build: .
+  dockerfile: Dockerfile
+  command: npm start
+  links:
+    - mysql
+mysql:
+  image: mysql

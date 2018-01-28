@@ -38,6 +38,7 @@
     },
     "testRegex": "^((?!c9).)*test/.+\\.spec\\.ts$",
     "coverageDirectory": "./coverage",
-    "collectCoverage": true
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": ["/test"]
   }
 }

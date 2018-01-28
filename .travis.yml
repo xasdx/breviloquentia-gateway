@@ -4,15 +4,7 @@ node_js:
   - node
   
 services:
-  - mysql
-  
-before_install:
-  - mysql -u root --password="" < db.sql
-  
-install:
-  - npm install -g codecov
-  - npm install
-  
+  - docker
+
 script:
-  - npm test
-  - codecov
+  - bash run_tests.sh
