@@ -1,5 +1,5 @@
 FROM node:latest
 WORKDIR /usr/src/app
 COPY package.json /usr/src/app
-RUN mysql -u root --password="" < db.sql && npm install -g codecov && npm install
+RUN npm install -g codecov && npm install
 COPY . /usr/src/app

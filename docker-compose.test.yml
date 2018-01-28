@@ -1,14 +1,13 @@
 sut:
   build: .
   dockerfile: Dockerfile.test
-  command: npm test && codecov
-  links:
-    - web
-web:
-  build: .
-  dockerfile: Dockerfile
-  command: npm start
+  command: bash -c "npm test && codecov"
   links:
     - mysql
 mysql:
   image: mysql
+  environment:
+    - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+  volumes:
+    - ./db:/tmp/db
+  command: mysqld --init-file="/tmp/db/init.sql"

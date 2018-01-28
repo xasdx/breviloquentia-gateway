@@ -4,7 +4,7 @@ import { ServiceModule } from "./service/service.module"
 
 let typeOrm = TypeOrmModule.forRoot({
   type: "mysql",
-  host: process.env["DB_HOST"] || "localhost",
+  host: process.env["DB_HOST"] || "mysql",
   port: 3306,
   username: process.env["DB_USER"] || "root",
   password: process.env["DB_PASS"] || null,

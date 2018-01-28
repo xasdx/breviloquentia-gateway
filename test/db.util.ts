@@ -6,7 +6,7 @@ export class Database {
 
   constructor(name: string) {
     this.db = sql.createConnection({
-      host: process.env["DB_HOST"] || "localhost",
+      host: process.env["DB_HOST"] || "mysql",
       user: process.env["DB_USER"] || "root",
       password: process.env["DB_PASS"] || null,
       database: name

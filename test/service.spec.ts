@@ -1,7 +1,8 @@
 import * as express from "express"
 import * as request from "supertest"
 import { Test } from "@nestjs/testing"
-import "jest-to-match-shape-of"
+import { toMatchOneOf, toMatchShapeOf } from "jest-to-match-shape-of"
+expect.extend({ toMatchOneOf, toMatchShapeOf })
 import { Database } from "./db.util"
 import { ApplicationModule } from "../src/app.module"
 

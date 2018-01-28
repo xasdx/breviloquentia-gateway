@@ -1,0 +1,10 @@
+web:
+  build: .
+  dockerfile: Dockerfile
+  command: npm start
+  links:
+    - mysql
+  ports:
+    - "3210:8080"
+mysql:
+  image: mysql
