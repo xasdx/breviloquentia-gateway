@@ -6,4 +6,4 @@ import { ServiceService } from "./service/service.service"
   controllers: [ServiceController],
   components: [ServiceService]
 })
-export class ServiceModule {}
+export class ServiceModule { }

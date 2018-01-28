@@ -5,15 +5,15 @@ import { ServiceService } from "../service/service.service"
 @Controller("services")
 export class ServiceController {
   
-  constructor(private readonly service: ServiceService) {}
-  
+  constructor(private readonly service: ServiceService) { }
+
   @Get()
   async findAll() {
     return this.service.findAll()
   }
-  
+
   @Post()
   async create(@Body() dto: ServiceDto) {
-    return this.service.create(dto)
+    return this.service.create({ id: null, ...dto })
   }
 }

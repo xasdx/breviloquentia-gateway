@@ -14,4 +14,4 @@ let typeOrm = TypeOrmModule.forRoot({
 })
 
 @Module({ imports: [typeOrm, ServiceModule] })
-export class ApplicationModule {}
+export class ApplicationModule { }
