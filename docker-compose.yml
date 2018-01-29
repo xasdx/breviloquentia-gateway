@@ -1,6 +1,6 @@
 web:
   build: .
-  dockerfile: Dockerfile
+  dockerfile: docker/Dockerfile
   command: npm start
   links:
     - mysql
