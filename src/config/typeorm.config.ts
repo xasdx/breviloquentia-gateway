@@ -8,7 +8,7 @@ export default async function (): Promise<Connection> {
     username: process.env["DB_USER"] || "root",
     password: process.env["DB_PASS"] || null,
     database: "test",
-    entities: [__dirname + "/**/*.model.ts"],
+    entities: [__dirname + "/../**/*.model.ts"],
     synchronize: true
   })
 }

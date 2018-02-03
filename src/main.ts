@@ -6,11 +6,26 @@ import typeOrmConfig from "./config/typeorm.config"
 import ServiceRoutes from "./service/service.routes"
 import ServiceService from "./service/service.service"
 
-async function bootstrap() {
-  let connection: Connection = await typeOrmConfig()
-  let router: express.Router = express.Router()
-  ServiceRoutes.create(router, ServiceService.create(connection))
-  Server.create(router, expressConfig).start()
-}
+export default class Application {
 
-bootstrap()
+  public connection: Connection
+  public router: express.Router
+  public server: Server
+  public app: express.Application
+
+  public static create(done: Function) {
+    typeOrmConfig().then((connection: Connection) => {
+      done(new Application(connection))
+    })
+  }
+
+  constructor(connection: Connection) {
+    this.connection = connection
+    this.router = express.Router()
+
+    ServiceRoutes.create(this.router, ServiceService.create(this.connection))
+
+    this.server = Server.create(this.router, expressConfig)
+    this.app = this.server.application()
+  }
+}
