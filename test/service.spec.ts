@@ -1,27 +1,25 @@
-import * as express from "express"
-import * as request from "supertest"
-import { toMatchOneOf, toMatchShapeOf } from "jest-to-match-shape-of"
-expect.extend({ toMatchOneOf, toMatchShapeOf })
-import { Database } from "./db.util"
+import { expect } from "chai"
+import "mocha"
 import Application from "../src/main"
 
-describe("Service API", async () => {
+describe("Service API", () => {
 
   //let table = new Database("test").table("service")
 
   //beforeEach(done => table.clean(done))
   
-  // it("Handles GET /services", async (done) => {
-  //   let service = { name: "breviloquentia-post" }
-  //   table.insertRow(service, async (err, res) => {
-  //     if (err) throw err
-  //     let response = await request("/").get("/services").expect(200)
-  //     expect(response.body[0]).toMatchShapeOf({ id: 0, name: "service" })
-  //     expect(response.body[0].name).toBe(service.name)
-  //     done()
-  //   })
-  //   done()
-  // })
+  it("Handles GET /services", () => {
+    expect("doge").to.eq("doge")
+    let service = { name: "breviloquentia-post" }
+    // table.insertRow(service, async (err, res) => {
+    //   if (err) throw err
+    //   let response = await request("/").get("/services").expect(200)
+    //   expect(response.body[0]).toMatchShapeOf({ id: 0, name: "service" })
+    //   expect(response.body[0].name).toBe(service.name)
+    //   done()
+    // })
+    // done()
+  })
   
   // it("Handles POST /services", async (done) => {
   //   let service = { name: "breviloquentia-post" }
