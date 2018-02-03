@@ -3,11 +3,8 @@ sut:
   dockerfile: docker/Dockerfile.test
   command: bash -c "npm test && codecov"
   links:
-    - mysql
-mysql:
-  image: mysql
-  environment:
-    - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    - db
+db:
+  image: postgres
   volumes:
-    - ./db:/tmp/db
-  command: mysqld --init-file="/tmp/db/init.sql"
+    - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql

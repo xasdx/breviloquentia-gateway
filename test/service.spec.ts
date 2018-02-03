@@ -1,16 +1,27 @@
-import { expect } from "chai"
 import "mocha"
+import * as chai from "chai"
+import * as chaiHttp from "chai-http"
 import Application from "../src/main"
+
+chai.use(chaiHttp)
+
+let { expect } = chai
 
 describe("Service API", () => {
 
   //let table = new Database("test").table("service")
-
   //beforeEach(done => table.clean(done))
   
-  it("Handles GET /services", () => {
-    expect("doge").to.eq("doge")
+  it("Handles GET /services", (done) => {
     let service = { name: "breviloquentia-post" }
+    Application.create((application: Application) => {
+      chai.request(application.app).get("/services").end((err, res) => {
+        expect(res.status).to.eq("200")
+        console.log(res.body)
+        done()
+      })
+    })
+
     // table.insertRow(service, async (err, res) => {
     //   if (err) throw err
     //   let response = await request("/").get("/services").expect(200)

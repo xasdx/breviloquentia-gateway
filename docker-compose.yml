@@ -3,8 +3,8 @@ web:
   dockerfile: docker/Dockerfile
   command: npm start
   links:
-    - mysql
+    - db
   ports:
     - "3210:8080"
-mysql:
-  image: mysql
+db:
+  image: postgres
