@@ -16,8 +16,7 @@ describe("Service API", () => {
     let service = { name: "breviloquentia-post" }
     Application.create((application: Application) => {
       chai.request(application.app).get("/services").end((err, res) => {
-        expect(res.status).to.eq("200")
-        console.log(res.body)
+        expect(res.status).to.eq(200)
         done()
       })
     })

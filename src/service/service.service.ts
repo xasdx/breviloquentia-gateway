@@ -2,7 +2,7 @@ import { Connection, Repository } from "typeorm"
 import { Service } from "./service.model"
 
 export default class ServiceService {
-  
+
   private repository: Repository<Service>
 
   public static create(connection: Connection): ServiceService {
@@ -14,10 +14,10 @@ export default class ServiceService {
   }
 
   async create(service: Service) {
-    return this.repository.save(service)
+    return await this.repository.save(service)
   }
 
   async findAll() {
-    return this.repository.find()
+    return await this.repository.find()
   }
 }

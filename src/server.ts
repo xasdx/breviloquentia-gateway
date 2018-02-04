@@ -8,7 +8,7 @@ export default class Server {
   public static create(routes: express.Router, config: Function): Server {
     return new Server(routes, config)
   }
-  
+
   constructor(routes: express.Router, config: Function) {
     this.app = express()
     config(this.app)
