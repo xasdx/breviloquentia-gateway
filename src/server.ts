@@ -3,13 +3,13 @@ import * as express from "express"
 
 export default class Server {
 
-  private app: express.Application
-
-  public static create(routes: express.Router, config: Function): Server {
+  public static create(routes: express.Router, config: (app: express.Application) => void): Server {
     return new Server(routes, config)
   }
 
-  constructor(routes: express.Router, config: Function) {
+  private app: express.Application
+
+  constructor(routes: express.Router, config: (app: express.Application) => void) {
     this.app = express()
     config(this.app)
     this.app.use(routes)

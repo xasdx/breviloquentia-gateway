@@ -1,12 +1,12 @@
 {
   "defaultSeverity": "error",
-  "extends": [
-    "tslint:recommended"
-  ],
-  "jsRules": {},
+  "extends": ["tslint:recommended"],
   "rules": {
-    "semicolon": [true, "never"],
-    "prefer-const": false
-  },
-  "rulesDirectory": []
+    "semicolon": false,
+    "prefer-const": false,
+    "trailing-comma": false,
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "no-string-literal": false
+  }
 }

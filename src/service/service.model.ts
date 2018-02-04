@@ -10,8 +10,8 @@ export class Service {
   }
 
   @PrimaryGeneratedColumn("uuid")
-  id: string
+  public id: string
 
   @Column({ type: "varchar", length: 255 })
-  name: string
+  public name: string
 }

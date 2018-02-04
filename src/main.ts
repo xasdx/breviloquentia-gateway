@@ -8,15 +8,15 @@ import ServiceService from "./service/service.service"
 
 export default class Application {
 
-  public connection: Connection
-  public router: express.Router
-  public server: Server
-  public app: express.Application
-
   public static async create() {
     let connection: Connection = await typeOrmConfig()
     return new Application(connection)
   }
+
+  public connection: Connection
+  public router: express.Router
+  public server: Server
+  public app: express.Application
 
   constructor(connection: Connection) {
     this.connection = connection
