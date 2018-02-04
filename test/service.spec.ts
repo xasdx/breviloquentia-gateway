@@ -1,44 +1,48 @@
 import "mocha"
 import * as chai from "chai"
 import * as chaiHttp from "chai-http"
+import { Connection, Repository } from "typeorm"
 import Application from "../src/main"
+import { Service } from "../src/service/service.model"
 
 chai.use(chaiHttp)
 
 let { expect } = chai
 
-describe("Service API", () => {
+let application: Application
+let repository: Repository<Service>
 
-  //let table = new Database("test").table("service")
-  //beforeEach(done => table.clean(done))
-  
+let app = async () => {
+  if (!application) {
+    application = await Application.create()
+    repository = await application.connection.getRepository(Service)
+  }
+  return {
+    express: application.app,
+    repository
+  }
+}
+
+describe("Service API", async () => {
+
+  let service = Service.create("breviloquentia-post")
+
   it("Handles GET /services", async () => {
-    let service = { name: "breviloquentia-post" }
-    let application: Application = await Application.create()
-    let res = await chai.request(application.app).get("/services")
+    let t = await app()
+    await t.repository.save(service)
+    let res = await chai.request(t.express).get("/services")
     expect(res.status).to.eq(200)
-    return Promise.resolve()
-    
-      // table.insertRow(service, async (err, res) => {
-    //   if (err) throw err
-    //   let response = await request("/").get("/services").expect(200)
-    //   expect(response.body[0]).toMatchShapeOf({ id: 0, name: "service" })
-    //   expect(response.body[0].name).toBe(service.name)
-    //   done()
-    // })
-    // done()
-  }).timeout(6000)
+    //expect(res.body[0]).toMatchShapeOf({ id: 0, name: "service" })
+    expect(res.body[0].name).to.eq(service.name)
+  })
   
-  // it("Handles POST /services", async (done) => {
-  //   let service = { name: "breviloquentia-post" }
-  //   let response = await request(app).post("/services").send(service).expect(201)
-  //   expect(response.body).toMatchShapeOf({ id: 0, name: "service" })
-  //   expect(response.body.name).toBe(service.name)
-  //   table.allRows((err, res) => {
-  //     if (err) throw err
-  //     expect(res[0].name).toBe(service.name)
-  //     done()
-  //   })
-  //   done()
-  // })
+  it("Handles POST /services", async () => {
+    let t = await app()
+    let res = await chai.request(t.express).post("/services").send({ name: service.name })
+    // expect(response.body).toMatchShapeOf({ id: 0, name: "service" })
+    expect(res.status).to.eq(201)
+    expect(res.body.name).to.eq(service.name)
+    let services = await t.repository.find()
+    expect(services[0].name).to.eq(service.name)
+  })
 })

@@ -10,7 +10,7 @@ export default class ServiceRoutes {
     })
 
     router.post("/services", async (req: Request, res: Response) => {
-      res.send(service.create(req.body))
+      res.status(201).send(await service.create(req.body))
     })
   }
 }
