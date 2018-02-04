@@ -13,10 +13,9 @@ export default class Application {
   public server: Server
   public app: express.Application
 
-  public static create(done: Function) {
-    typeOrmConfig().then((connection: Connection) => {
-      done(new Application(connection))
-    })
+  public static async create() {
+    let connection: Connection = await typeOrmConfig()
+    return new Application(connection)
   }
 
   constructor(connection: Connection) {

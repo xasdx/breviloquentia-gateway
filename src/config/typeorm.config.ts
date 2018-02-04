@@ -1,7 +1,7 @@
 import { createConnection, Connection } from "typeorm"
 
-export default function (): Promise<Connection> {
-  return createConnection({
+export default async function (): Promise<Connection> {
+  return await createConnection({
     type: "postgres",
     host: process.env["DB_HOST"] || "db",
     port: 5432,

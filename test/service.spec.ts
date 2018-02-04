@@ -12,16 +12,14 @@ describe("Service API", () => {
   //let table = new Database("test").table("service")
   //beforeEach(done => table.clean(done))
   
-  it("Handles GET /services", (done) => {
+  it("Handles GET /services", async () => {
     let service = { name: "breviloquentia-post" }
-    Application.create((application: Application) => {
-      chai.request(application.app).get("/services").end((err, res) => {
-        expect(res.status).to.eq(200)
-        done()
-      })
-    })
-
-    // table.insertRow(service, async (err, res) => {
+    let application: Application = await Application.create()
+    let res = await chai.request(application.app).get("/services")
+    expect(res.status).to.eq(200)
+    return Promise.resolve()
+    
+      // table.insertRow(service, async (err, res) => {
     //   if (err) throw err
     //   let response = await request("/").get("/services").expect(200)
     //   expect(response.body[0]).toMatchShapeOf({ id: 0, name: "service" })
@@ -29,7 +27,7 @@ describe("Service API", () => {
     //   done()
     // })
     // done()
-  })
+  }).timeout(6000)
   
   // it("Handles POST /services", async (done) => {
   //   let service = { name: "breviloquentia-post" }
