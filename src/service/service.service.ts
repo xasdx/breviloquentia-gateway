@@ -3,13 +3,13 @@ import { Service } from "./service.model"
 
 export default class ServiceService {
 
-  public static create(connection: Connection): ServiceService {
+  public static create(connection): ServiceService {
     return new ServiceService(connection)
   }
 
   private repository: Repository<Service>
 
-  constructor(connection: Connection) {
+  constructor(connection) {
     this.repository = connection.getRepository(Service)
   }
 
