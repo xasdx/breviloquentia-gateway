@@ -2,7 +2,7 @@ import "mocha"
 import * as chai from "chai"
 import * as chaiHttp from "chai-http"
 import { Service } from "../src/service/service.model"
-import appFactory from "./application"
+import Application from "../src/main"
 import connectionMockFactory from "./mock/connection.mock"
 
 chai.use(chaiHttp)
@@ -14,7 +14,7 @@ let service = Service.create("breviloquentia-post")
 describe("Service API", async () => {
   it("Handles GET /services", async () => {
     let connection = connectionMockFactory({ services: [service] })
-    let app = appFactory({ connection })
+    let app = Application.createMocked({ connection }).app
     let res = await chai.request(app).get("/services")
     expect(res.status).to.eq(200)
     expect(res.body[0].name).to.eq(service.name)
@@ -24,7 +24,7 @@ describe("Service API", async () => {
     let connection = connectionMockFactory({ onSave: (srvc) => {
       expect(srvc.name).to.eq(service.name)
     }})
-    let app = appFactory({ connection })
+    let app = Application.createMocked({ connection }).app
     let res = await chai.request(app).post("/services").send({ name: service.name })
     expect(res.status).to.eq(201)
     expect(res.body.name).to.eq(service.name)

@@ -13,6 +13,10 @@ export default class Application {
     return new Application(connection)
   }
 
+  public static createMocked({ connection }) {
+    return new Application(connection)
+  }
+
   public connection: Connection
   public router: express.Router
   public server: Server
