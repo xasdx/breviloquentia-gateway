@@ -29,10 +29,14 @@ describe("Service API", async () => {
   it("Handles POST /services", async () => {
     let connection = connectionMockFactory({ onSave: (srvc) => {
       expect(srvc.name).to.eq(service.name)
+      expect(srvc.path).to.eq(service.path)
+      expect(srvc.url).to.eq(service.url)
     }})
     let app = Application.createMocked({ connection }).app
-    let res = await chai.request(app).post("/services").send({ name: service.name })
+    let res = await chai.request(app).post("/services").send({ name: service.name, path: service.path, url: service.url })
     expect(res.status).to.eq(201)
     expect(res.body.name).to.eq(service.name)
+    expect(res.body.path).to.eq(service.path)
+    expect(res.body.url).to.eq(service.url)
   })
 })
