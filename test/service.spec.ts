@@ -9,7 +9,11 @@ chai.use(chaiHttp)
 
 let { expect } = chai
 
-let service = Service.create("breviloquentia-post")
+let service = Service.create(
+  "breviloquentia-post",
+  "\/api\/postmgmt",
+  "http://www.hostname.com/api"
+)
 
 describe("Service API", async () => {
   it("Handles GET /services", async () => {
@@ -18,6 +22,8 @@ describe("Service API", async () => {
     let res = await chai.request(app).get("/services")
     expect(res.status).to.eq(200)
     expect(res.body[0].name).to.eq(service.name)
+    expect(res.body[0].path).to.eq(service.path)
+    expect(res.body[0].url).to.eq(service.url)
   })
 
   it("Handles POST /services", async () => {
