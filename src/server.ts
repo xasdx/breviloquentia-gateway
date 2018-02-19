@@ -17,6 +17,7 @@ export default class Server {
 
   public start() {
     this.app.listen(3210)
+    console.log("server is up")
   }
 
   public application() {

@@ -2,7 +2,7 @@ import "mocha"
 import * as chai from "chai"
 import * as chaiHttp from "chai-http"
 import { Service } from "../src/service/service.model"
-import Application from "../src/main"
+import Application from "../src/application"
 import connectionMockFactory from "./mock/connection.mock"
 
 chai.use(chaiHttp)
