@@ -10,21 +10,8 @@ import RouterService from "./router/router.service"
 export default class Application {
 
   public static async create() {
-    //let connection: Connection = await typeOrmConfig()
-
-    let repositoryMock = {
-      save: (item) => {
-        //if (onSave) { onSave(item) }
-        return item
-      },
-      find: () => [{ name: "brevpost", path: "^\/api\/postmgmt\/posts.*$" }]
-    }
-  
-    let connectionMock = {
-      getRepository: () => repositoryMock
-    }
-
-    return new Application(connectionMock)
+    let connection: Connection = await typeOrmConfig()
+    return new Application(connection)
   }
 
   public static createMocked({ connection }) {
